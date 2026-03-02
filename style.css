@@ -1,0 +1,67 @@
+:root {
+    --primary-purple: #2A093D;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+.main-header {
+    background-color: var(--primary-purple);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    width: 100%;
+}
+
+.logo {
+    height: 35px;
+    display: block;
+}
+
+/* Main Content Area */
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
+}
+
+.card {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 20px;
+    /* Base border radius, incase images are fully square */
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 1024px) {
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+}
