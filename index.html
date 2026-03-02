@@ -37,7 +37,7 @@
     <!-- Inter Font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -50,18 +50,32 @@
     </header>
 
     <main class="content-wrapper">
-        <div class="card left-card">
-            <a href="https://ebanking.optimabank.gr/netteller/" target="_blank">
-                <img src="images/left_screen_ebanking.png"
-                    alt="Screenshot of the Optima bank e-banking login screen featuring a man touching his face thoughtfully">
-            </a>
+        <div class="content-left">
+            <h1 class="main-title">Η σελίδα μας προσωρινά<br>δεν είναι διαθέσιμη.</h1>
+            <p class="sub-description">
+                <strong>Optima e-banking</strong> και <strong>Optima bank trader</strong> λειτουργούν<br>
+                κανονικά και είναι στη διάθεσή σας.
+            </p>
+            <div class="button-group">
+                <a href="https://ebanking.optimabank.gr/netteller/" target="_blank" class="btn btn-primary">
+                    Optima e-banking
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="icon-arrow">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+                <a href="https://trader.optimabank.gr/" target="_blank" class="btn btn-secondary">
+                    Optima bank trader
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="icon-arrow">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
         </div>
 
-        <div class="card right-card">
-            <a href="https://trader.optimabank.gr/" target="_blank">
-                <img src="images/right_screen_trader.png"
-                    alt="Screenshot of the Optima trader login screen showing a dark themed interface with financial charts and market data">
-            </a>
+        <div class="content-right">
+            <img src="images/3d0image-dec.png" alt="Optima bank devices" class="devices-img">
         </div>
     </main>
 
@@ -70,7 +84,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             // Set initial state to avoid flash of unstyled content
-            gsap.set([".main-header", ".logo", ".card"], { autoAlpha: 0 });
+            gsap.set([".main-header", ".logo", ".main-title", ".sub-description", ".btn", ".devices-img"], { autoAlpha: 0 });
             gsap.set(".main-header", { autoAlpha: 1 }); // Header background is visible, we'll slide it
 
             const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
@@ -78,20 +92,36 @@
             // 1. Header bar slides down
             tl.from(".main-header", {
                 yPercent: -100,
-                duration: 1.2,
+                duration: 1.0,
                 ease: "expo.out"
             })
                 // 2. Logo fades and scales in
                 .fromTo(".logo",
                     { opacity: 0, scale: 0.8, y: 15 },
-                    { opacity: 1, scale: 1, y: 0, duration: 1.2, autoAlpha: 1, ease: "back.out(1.5)" },
+                    { opacity: 1, scale: 1, y: 0, duration: 1.0, autoAlpha: 1, ease: "back.out(1.5)" },
+                    "-=0.6"
+                )
+                // 3. Left content text
+                .fromTo(".main-title",
+                    { opacity: 0, y: 30 },
+                    { opacity: 1, y: 0, duration: 1.0, autoAlpha: 1 },
+                    "-=0.4"
+                )
+                .fromTo(".sub-description",
+                    { opacity: 0, y: 20 },
+                    { opacity: 1, y: 0, duration: 1.0, autoAlpha: 1 },
                     "-=0.8"
                 )
-                // 3. Cards pop up from bottom sequentially (left then right)
-                .fromTo(".card",
-                    { opacity: 0, y: 100, scale: 0.95, rotationX: 10, transformPerspective: 1000 },
-                    { opacity: 1, y: 0, scale: 1, rotationX: 0, duration: 1.5, autoAlpha: 1, stagger: 0.25, ease: "expo.out" },
-                    "-=0.9"
+                .fromTo(".btn",
+                    { opacity: 0, y: 20 },
+                    { opacity: 1, y: 0, duration: 0.8, autoAlpha: 1, stagger: 0.15 },
+                    "-=0.8"
+                )
+                // 4. Right image
+                .fromTo(".devices-img",
+                    { opacity: 0, x: 50, scale: 0.95 },
+                    { opacity: 1, x: 0, scale: 1, duration: 1.5, autoAlpha: 1, ease: "expo.out" },
+                    "-=1.2"
                 );
         });
     </script>
