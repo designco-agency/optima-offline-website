@@ -4,7 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optima bank - Login</title>
+    <meta name="description"
+        content="Καλωσορίσατε στην Optima bank. Συνδεθείτε με ασφάλεια στο e-banking ή στην πλατφόρμα Optima trader. Η επίσημη εναλλακτική σελίδα πρόσβασης στις υπηρεσίες μας.">
+    <meta name="robots" content="index, follow">
+    <!-- Ensure search engines index but don't panic if it replaces main site -->
+    <meta name="theme-color" content="#2A093D"> <!-- Matches primary purple for mobile browsers -->
+    <link rel="canonical" href="https://www.optimabank.gr/">
+
+    <!-- Open Graph (Facebook, LinkedIn, iMessage, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Optima Bank - Αρχική">
+    <meta property="og:description"
+        content="Καλωσορίσατε στην Optima bank. Συνδεθείτε με ασφάλεια στο e-banking ή στην πλατφόρμα Optima trader.">
+    <meta property="og:url" content="https://www.optimabank.gr/">
+    <meta property="og:image" content="https://www.optimabank.gr/media/tyya5n45/optima-orange.svg">
+    <!-- Safe default logo -->
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Optima Bank - Αρχική">
+    <meta name="twitter:description"
+        content="Καλωσορίσατε στην Optima bank. Συνδεθείτε με ασφάλεια στο e-banking ή στην πλατφόρμα Optima trader.">
+    <meta name="twitter:image" content="https://www.optimabank.gr/media/tyya5n45/optima-orange.svg">
+
+    <title>Optima Bank - Αρχική</title>
     <!-- Inter Font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,14 +45,50 @@
 
     <main class="content-wrapper">
         <div class="card left-card">
-            <img src="images/left_screen_ebanking.png" alt="e-banking login">
+            <a href="https://ebanking.optimabank.gr/netteller/" target="_blank">
+                <img src="images/left_screen_ebanking.png"
+                    alt="Screenshot of the Optima bank e-banking login screen featuring a man touching his face thoughtfully">
+            </a>
         </div>
 
         <div class="card right-card">
-            <img src="images/right_screen_trader.png" alt="trader login">
+            <a href="https://trader.optimabank.gr/" target="_blank">
+                <img src="images/right_screen_trader.png"
+                    alt="Screenshot of the Optima trader login screen showing a dark themed interface with financial charts and market data">
+            </a>
         </div>
     </main>
 
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Set initial state to avoid flash of unstyled content
+            gsap.set([".main-header", ".logo", ".card"], { autoAlpha: 0 });
+            gsap.set(".main-header", { autoAlpha: 1 }); // Header background is visible, we'll slide it
+
+            const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+            // 1. Header bar slides down
+            tl.from(".main-header", {
+                yPercent: -100,
+                duration: 1.2,
+                ease: "expo.out"
+            })
+                // 2. Logo fades and scales in
+                .fromTo(".logo",
+                    { opacity: 0, scale: 0.8, y: 15 },
+                    { opacity: 1, scale: 1, y: 0, duration: 1.2, autoAlpha: 1, ease: "back.out(1.5)" },
+                    "-=0.8"
+                )
+                // 3. Cards pop up from bottom sequentially (left then right)
+                .fromTo(".card",
+                    { opacity: 0, y: 100, scale: 0.95, rotationX: 10, transformPerspective: 1000 },
+                    { opacity: 1, y: 0, scale: 1, rotationX: 0, duration: 1.5, autoAlpha: 1, stagger: 0.25, ease: "expo.out" },
+                    "-=0.9"
+                );
+        });
+    </script>
 </body>
 
 </html>
